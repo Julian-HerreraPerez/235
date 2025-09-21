@@ -1,0 +1,57 @@
+#JulianPhoto {
+    float: left;
+    width: 30%;
+    height: 30%;
+}
+
+#GitLink {
+    margin-left: 29rem;
+    font-size: x-large;
+}
+
+h1 {
+    font-family: sans-serif;
+    margin-left: 52rem;
+}
+
+.Bio {
+    margin-top: 5rem;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    margin-bottom: 5rem;
+    font-size: xx-large;
+}
+
+.links {
+    margin-left: 12rem;
+    font-size: xx-large;
+}
+
+a:visited {
+    color: rgb(53, 85, 85);
+}
+
+a:hover {
+    color: rgb(84, 156, 207);
+}
+
+a:focus {
+    color: rgb(56, 150, 103);
+}
+
+a:active {
+    color: azure
+}
+
+body {
+    background-color: antiquewhite;
+}
+
+main {
+    font-family: 'Times New Roman', Times, serif;
+    border: 2px solid black;
+    margin-top: 10rem;
+    margin-left: 40rem;
+    margin-right: 4rem;
+    background-color: rgb(132, 201, 195);
+}
