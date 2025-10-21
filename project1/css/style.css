@@ -1,21 +1,23 @@
+#wrapper {
+    font-family: 'Times New Roman';
+}
+
 #MainTitle {
     background-color: yellow;
     width: 600px;
     height: 100px;
     text-align: center;
     grid-area: main;
-    font-family: Georgia;
+    font-family: Impact;
     font-weight: bolder;
 }
 
 #ArticleTitle {
-    margin-left: 2em;
     grid-area: title;
-    width: 250px;
-    height: auto;
-    font-size: xx-large;
-    font-family: Georgia;
-    font-weight: bolder;
+    font-size: xxx-large;
+    font-family: Impact;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 #article1 {
@@ -28,21 +30,49 @@
     margin-left: 1em;
 }
 
+#article3 {
+    margin-left: 1em;
+}
+
 #img1 {
     grid-area: img1;
     justify-self: center;
-
+    width: 350px;
+    height: 250px;
 }
 
 #img2 {
     grid-area: img2;
     justify-self: center;
+    width: 250px;
+    height: 250px;
+
+}
+
+#img3 {
+    grid-area: img3;
+    justify-self: center;
+    width: 400px;
+    height: 400px;
+
+}
+
+#img4 {
+    grid-area: img4;
+    margin-top: auto;
+    justify-self: center;
+    width: 300px;
+    height: 300px;
+
+}
+
+b {
+    font-weight: bold;
 }
 
 #subtitle {
-    grid-area: title;
+    grid-area: subtitle;
     font-size: medium;
-    margin-top: 4em;
     margin-left: 2rem;
 }
 
@@ -51,44 +81,62 @@
     margin-top: 20em;
     justify-content: center;
     font-size: small;
+    font-weight: 100;
 }
 
 #captionbottom {
     grid-area: img2;
-    margin-top: 20em;
     justify-content: center;
     font-size: small;
+    font-weight: 100;
 }
 
+#dates {
+    grid-area: dates;
+    margin-bottom: auto;
+    color: gray;
+    font-family: Impact;
+}
 
 #wrapper {
     display: grid;
     grid-template-areas:
         "main"
+        "dates"
         "title"
+        "subtitle"
         "img1"
         "article1"
         "img2"
-        "article2";
+        "article2"
+        "img3"
+        "articel3"
+        "img4";
     grid-template-rows: auto auto auto auto auto;
     grid-template-columns: auto;
 }
 
-@media screen and (min-width: 850px) {
+@media screen and (min-width: 1200px) {
     #wrapper {
         grid-template-areas:
             "main      main"
+            "img1    dates"
             "img1    title"
+            "img1    subtitle"
             "img1  article1"
-            "img2  article2";
+            "img2  article2"
+            "img2  articel3"
+            "img3  img4";
 
         grid-template-columns: 700px 40vw;
         grid-template-rows: auto auto auto;
     }
 
+
     #MainTitle {
         margin-left: 1fr;
     }
+
 
     #img1 {
         justify-self: end;
@@ -97,8 +145,29 @@
     #img2 {
         grid-area: img2;
         padding-top: 2em;
+        margin-right: 2em;
         justify-self: end;
         transform: rotate(-7deg);
+    }
+
+    #img3 {
+        grid-area: img3;
+        justify-self: end;
+    }
+
+    #img4 {
+        grid-area: img4;
+        justify-self: end;
+        transform: rotate(30deg);
+    }
+
+    #img5 {
+        grid-area: img4;
+        margin-top: auto;
+        margin-bottom: 5vw;
+        margin-left: 6vw;
+        width: 200px;
+        height: 200px;
     }
 
     #captiontop {
@@ -107,7 +176,7 @@
         margin-top: 20em;
         margin-left: 20rem;
         margin-right: 10rem;
-        transform: translateX(-50px)
+        transform: translateX(-60px)
     }
 
     #captionbottom {
@@ -119,4 +188,23 @@
         transform: translateX(170px);
     }
 
+    #dates {
+        margin-top: auto;
+        margin-left: 2em;
+    }
+
+    #ArticleTitle {
+        margin-left: 2rem;
+    }
+
+}
+
+@media screen and (max-width: 1600px) {
+    #img5 {
+        display: none;
+    }
+
+    #img2 {
+        margin-top: 4em
+    }
 }
