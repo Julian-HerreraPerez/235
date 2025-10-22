@@ -6,22 +6,62 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
+    <h1>JavaScript Demo</h1>
+</body>
+
+<script>
         // ===========================
         // 1. Console Basics 
         //============================
         console.log("Hello World");
-        let name = 'Travis';
-        name = name + ' Stodter';
-        console.log("Good work " + name);
+
         //============================
         //2. Variables
         //============================
         const seven = 7;
-        
+        let name = 'Travis';
+        name = name + ' Stodter';
+        console.log("Good work " + name);
+
+         //============================
+         // 3. Template Literals (backticks)
+         //============================
+        let string1 = 'hello';
+         let string2 = "hello";
+         let string3 = `hello ${3+4}`;
+         //============================
+         // 4. Arrays
+         //============================
+         let grades = [67,77,89,99,45];
+         grades.push(56);
+         grades.push(98);
+
+         for(let i =0; i < grades.length; i++)
+         {
+            console.log('Grade' +i+ ':', grades[i]);
+         }
 
 
+
+
+         const person = {
+            name: 'tavis',
+            grade: 'supergood',
+            equipment: [
+                'magic staff of magic',
+                'orb of orbing'
+            ]
+         }
+
+         console.log(person.name);
+         console,log(person.equipment.length);
+         console.log(person.grade)
+
+         //===========================================
+         //5. Document.QuesrySelector (single element)
+         //===========================================
+
+         let h1 = document.querySelector('h1');
+         h1.innerText = 'Not the javascript demo'
     </script>
-    
-</body>
 </html>
