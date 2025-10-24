@@ -6,22 +6,137 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
+    <h1 id="heading">JavasScript Demo</h1>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere voluptatibus odio ut mollitia quisquam harum perferendis ratione inventore incidunt pariatur voluptatem qui officiis, minus eos dolorem quod libero iure! Distinctio!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere voluptatibus odio ut mollitia quisquam harum perferendis ratione inventore incidunt pariatur voluptatem qui officiis, minus eos dolorem quod libero iure! Distinctio!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere voluptatibus odio ut mollitia quisquam harum perferendis ratione inventore incidunt pariatur voluptatem qui officiis, minus eos dolorem quod libero iure! Distinctio!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere voluptatibus odio ut mollitia quisquam harum perferendis ratione inventore incidunt pariatur voluptatem qui officiis, minus eos dolorem quod libero iure! Distinctio!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere voluptatibus odio ut mollitia quisquam harum perferendis ratione inventore incidunt pariatur voluptatem qui officiis, minus eos dolorem quod libero iure! Distinctio!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere voluptatibus odio ut mollitia quisquam harum perferendis ratione inventore incidunt pariatur voluptatem qui officiis, minus eos dolorem quod libero iure! Distinctio!</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere voluptatibus odio ut mollitia quisquam harum perferendis ratione inventore incidunt pariatur voluptatem qui officiis, minus eos dolorem quod libero iure! Distinctio!</p>
+</body>
+
+<script>
         // ===========================
         // 1. Console Basics 
         //============================
         console.log("Hello World");
-        let name = 'Travis';
-        name = name + ' Stodter';
-        console.log("Good work " + name);
+
         //============================
         //2. Variables
         //============================
         const seven = 7;
+        let name = 'Travis';
+        name = name + ' Stodter';
+        console.log("Good work " + name);
+
+         //============================
+         // 3. Template Literals (backticks)
+         //============================
+        let string1 = 'hello';
+         let string2 = "hello";
+         let string3 = `hello ${3+4}`;
+
+         //============================
+         // 4. Arrays
+         //============================
+         let grades = [67,77,89,99,45];
+         grades.push(56);
+         grades.push(98);
+
+         for(let i =0; i < grades.length; i++)
+         {
+            console.log('Grade' +i+ ':', grades[i]);
+         }
+
+         const person = {
+            name: 'tavis',
+            grade: 'supergood',
+            equipment: [
+                'magic staff of magic',
+                'orb of orbing'
+            ]
+         }
+
+
+         //===========================================
+         //5. Document.QuesrySelector (single element)
+         //===========================================
+         const h1 = document.querySelector('#heading');
+         h1.innerText = 'Not the javascript demo';
+
+         //===========================================
+         //6. Document.QuerySelectorAll (multiple elements)
+         //===========================================
         
+         const allPs = document.querySelectorAll('p');
+
+         for(let i= 0; i < allPs.length; i++)
+         {
+            let p = allPs[i];
+            p.innerText = "not LoremIpsm Pleaseeee";
+         }
+
+         //==========================================
+         //7.Changing Styles
+         //=========================================
+        //  for(let i= 0; i < allPs.length; i++)
+        //  {
+        //     let p = allPs[i];
+        //     let h = (i/allPs.length) * 360;
+        //     p.style.color = `hsl(${h}deg 75% 50%)`;
+        //  }
+
+         let colors =[
+            'red', 'orange', 'yellow', 'green', 'blue'
+         ];
+
+
+        // let colors = 
+        // {
+        //     0:'red',
+        //     1: 'orange',
+        //     2: 'yellow',
+        //     3: 'green',
+        //     4: 'blue',
+        //     5: 'violet',
+        //     length:6
+        // };
+
+         for(let i = 0; i<allPs.length; i++)
+         {
+            let p = allPs[i];
+            p.style.color= colors[i%colors.length];
+         }
+
+         //===============================================
+         // 8. For loops
+         // ==============================================
+
+         for(let x in colors)
+         {
+            
+         }
+         
+         colors.forEach((color,i)=>
+         {
+
+         })
+
+
+         //============================================
+         // 9. Functions
+         //============================================
+         const add2 = (n) =>
+         {
+            return n+2
+         };
+
+         function add3(n){
+            return n +3;
+         }
 
 
     </script>
-    
-</body>
 </html>
