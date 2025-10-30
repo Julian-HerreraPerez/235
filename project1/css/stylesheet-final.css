@@ -7,7 +7,30 @@ body {
     background-color: rgb(255, 255, 232);
 }
 
-
+.navbar{
+    grid-area: navbar;
+    justify-content: end;
+}
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #333333;
+    position: fixed;
+    justify-self: end;
+}
+ul li a {
+    display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a {
+  display: block;
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+}
 
 #MainTitle {
     background-color: rgb(10, 9, 9);
@@ -109,6 +132,7 @@ b {
 #wrapper {
     display: grid;
     grid-template-areas:
+        "navbar"
         "main"
         "dates"
         "title"
@@ -128,6 +152,7 @@ b {
 @media screen and (min-width: 1200px) {
     #wrapper {
         grid-template-areas:
+            "navbar    navbar"
             "main      main"
             "img1    dates"
             "img1    title"
@@ -216,6 +241,27 @@ b {
         width: 600px;
         height: 100px;
         margin-left: 1em;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background-color: #333333;
+        display: flex;
+        position: fixed;
+        justify-self: end;
+    }
+
+    ul li a {
+        display: block;
+        color: white;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    ul li a:hover {
+        background-color: #111111;
     }
 
 }
