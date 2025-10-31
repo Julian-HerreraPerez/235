@@ -79,6 +79,13 @@ li a {
     grid-area: article3;
 }
 
+#article1,
+#article2,
+#article3 {
+    font-size: x-large;
+    line-height: 1em;
+}
+
 #img1 {
     grid-area: img1;
     justify-self: center;
@@ -91,7 +98,7 @@ li a {
     justify-self: center;
     width: 250px;
     height: 350px;
-
+    margin-bottom: 3em;
 }
 
 #img3 {
@@ -100,6 +107,7 @@ li a {
     max-width: 500px;
     width: auto;
     height: 400px;
+    margin-bottom: 3em;
 }
 
 #img4 {
@@ -117,20 +125,23 @@ b {
 #subtitle {
     grid-area: subtitle;
     font-size: medium;
+    margin-bottom: 2em;
+    margin-top: 2em;
 }
 
 #captiontop {
     grid-area: img1;
-    margin-top: 20em;
+    margin-top: 15em;
     justify-content: center;
-    font-size: small;
+    font-size: large;
     font-weight: 100;
+    margin-bottom: 2em;
 }
 
 #captionbottom {
     grid-area: caption;
     justify-content: center;
-    font-size: small;
+    font-size: large;
     font-weight: 100;
 }
 
@@ -186,6 +197,8 @@ b {
 
     #subtitle {
         margin-left: 2em;
+        margin-bottom: 0;
+        margin-top: 0;
     }
 
 
@@ -205,7 +218,8 @@ b {
     #img3 {
         grid-area: img3;
         justify-self: end;
-        filter: drop-shadow(30px 12px 10px gray)
+        filter: drop-shadow(30px 12px 10px gray);
+        margin-bottom: 0;
     }
 
     #img4 {
@@ -229,6 +243,7 @@ b {
         margin-left: auto;
         margin-right: 15em;
         width: 150px;
+        margin-top: 20em;
     }
 
     #captionbottom {
@@ -258,6 +273,13 @@ b {
     .navbar:hover .nav-list {
         display: flex;
     }
+
+    #article1,
+    #article2,
+    #article3 {
+        font-size: medium;
+        line-height: 2em;
+    }
 }
 
 @media screen and (max-width: 1600px) {
@@ -272,4 +294,5 @@ b {
     * {
         margin: 0;
     }
+
 }
