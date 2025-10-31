@@ -7,29 +7,42 @@ body {
     background-color: rgb(255, 255, 232);
 }
 
-.navbar{
+.navbar {
     grid-area: navbar;
-    justify-content: end;
 }
-ul{
+
+.navbar {
     list-style-type: none;
     margin: 0;
     padding: 0;
     background-color: #333333;
     position: fixed;
-    justify-self: end;
+
 }
-ul li a {
+
+.nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #333333;
+    display: none;
+    position: relative;
+}
+
+.navbar:hover .nav-list {
     display: block;
-    color: white;
-    padding: 14px 16px;
-    text-decoration: none;
 }
+
+ul li a:hover {
+    background-color: #696868;
+}
+
 li a {
-  display: block;
-  color: black;
-  padding: 8px 16px;
-  text-decoration: none;
+    grid-area: navbar;
+    display: block;
+    color: rgb(255, 255, 255);
+    padding: 8px 16px;
+    text-decoration: none;
 }
 
 #MainTitle {
@@ -83,7 +96,7 @@ li a {
 
 #img3 {
     grid-area: img3;
-    justify-self: center;
+    justify-self: end;
     max-width: 500px;
     width: auto;
     height: 400px;
@@ -95,7 +108,6 @@ li a {
     justify-self: center;
     width: 350px;
     height: 300px;
-
 }
 
 b {
@@ -152,7 +164,7 @@ b {
 @media screen and (min-width: 1200px) {
     #wrapper {
         grid-template-areas:
-            "navbar    navbar"
+
             "main      main"
             "img1    dates"
             "img1    title"
@@ -243,27 +255,9 @@ b {
         margin-left: 1em;
     }
 
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        background-color: #333333;
+    .navbar:hover .nav-list {
         display: flex;
-        position: fixed;
-        justify-self: end;
     }
-
-    ul li a {
-        display: block;
-        color: white;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-
-    ul li a:hover {
-        background-color: #111111;
-    }
-
 }
 
 @media screen and (max-width: 1600px) {
@@ -273,5 +267,9 @@ b {
 
     #img2 {
         margin-top: 4em
+    }
+
+    * {
+        margin: 0;
     }
 }
