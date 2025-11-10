@@ -6,21 +6,34 @@
     <title>Document</title>
 </head>
 <body>
-    <p>One</p>
-    <p>Two</p>
-    <p>Three</p>
-    <p>Four</p>
-    <p>Five</p>
+
+
+    <ul>
+        <li>Eevee</li>
+        <li>Bulbasaur</li>
+        <li>Mr. Mime</li>
+        <li>Pikachu</li>
+    </ul>
 
     <script>
+        const colors = ['red','orange','yellow','green','blue','indigo','voilet'];
+         let allList = document.querySelectorAll('li');
+         
+        const setColor = (elements, color) =>{
+            elements.style.color = color;
+        };
 
-    for(let i= 0; i<5; i++)
-    {
-        const j = document.querySelectorAll('p');
-        let k = j[i]
-        const colors = ['yellow','red', 'blue','orange','green']
-        k.style.color = colors[i];
-    }
+        
+        for(let i = 0; i<allList.length; i++)
+        {
+            
+            setTimeout(() => {
+                setColor(allList[i], colors[i %colors.length]);
+
+            }, i* 1000);
+        }
+
+
     </script>
 
 </body>
