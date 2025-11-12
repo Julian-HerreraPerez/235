@@ -34,6 +34,28 @@
         }
 
 
+        let r = Math.random()*100;
+        const oldRandom = localStorage.getItem('ranNumber');
+
+        // let personObj = {
+        //     name: "Julian",
+        //     age: "19",
+        //     mood: "bleh"
+
+        // }
+        
+        localStorage.setItem("ranNumber", r);
+        // localStorage.setItem("Person", JSON.stringify(personObj));
+       
+        
+        if(r > oldRandom)
+        {
+            localStorage.setItem("bigRan",r);
+            console.log(r);
+        }
+        
+
+
     </script>
 
 </body>
