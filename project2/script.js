@@ -57,15 +57,42 @@ function searchButtonClicked() {
 function display(imageURLS, resultsTitle) {
 
     const container = document.querySelector("#content");
+
+    container.classList.add("carousel");
     container.innerHTML = "";
+
     for (let i = 0; i < imageURLS.length; i++) {
-        let line = `<div class='result'>`;
-        line += `<img src='${imageURLS[i]}' alt='Art Image ${i + 1}' />`;
+        let line = `<a class='carousel-item' >`;
+        line += `<img src='${imageURLS[i]}' alt='Art Image ${i + 1}' onclick="enlargeImg(this)"/>`;
         line += `<p>${resultsTitle[i]}</p>`
-        line += `</div>`;
+        line += `</a>`;
         container.innerHTML += line;
     }
+
+    var elems = document.querySelectorAll('.carousel');
+    M.Carousel.init(elems, {
+        fullWidth: false,
+        indicators: false
+    });
 }
+
+function enlargeImg(imgElemt) {
+    if (!imgElemt.style.zoomed) {
+        imgElemt.style.width = "200%";
+        imgElemt.style.height = "auto";
+        imgElemt.style.transition = "width 0.5s ease";
+        imgElemt.style.zoomed = "true";
+    }
+    else {
+        imgElemt.style.width = "100%";
+        imgElemt.style.height = "auto";
+        imgElemt.style.transition = "width 0.5s ease";
+        imgElemt.style.zoomed = "";
+    }
+
+
+}
+
 
 
 
