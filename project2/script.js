@@ -32,6 +32,7 @@ function searchButtonClicked() {
                 return;
             }
             const resultsURL = results.map(item => item.api_link);
+            const resultsTitle = results.map(item => item.title);
 
             results.forEach(item => {
                 let resultsURL = (item.api_link);
@@ -48,18 +49,19 @@ function searchButtonClicked() {
 
                 .then(imageURLS => {
                     //console.log(imageURLS)
-                    display(imageURLS)
+                    display(imageURLS, resultsTitle)
                 })
         })
 }
 
-function display(imageURLS) {
+function display(imageURLS, resultsTitle) {
 
     const container = document.querySelector("#content");
     container.innerHTML = "";
     for (let i = 0; i < imageURLS.length; i++) {
         let line = `<div class='result'>`;
         line += `<img src='${imageURLS[i]}' alt='Art Image ${i + 1}' />`;
+        line += `<p>${resultsTitle[i]}</p>`
         line += `</div>`;
         container.innerHTML += line;
     }
