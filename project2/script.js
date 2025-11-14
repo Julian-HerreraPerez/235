@@ -17,7 +17,7 @@ function searchButtonClicked() {
 
     url += "?q=" + term;
 
-    //console.log(url);
+    console.log(url);
 
     fetch(url)
 
@@ -33,6 +33,7 @@ function searchButtonClicked() {
             }
             const resultsURL = results.map(item => item.api_link);
             const resultsTitle = results.map(item => item.title);
+            
 
             results.forEach(item => {
                 let resultsURL = (item.api_link);
@@ -46,12 +47,12 @@ function searchButtonClicked() {
                         .then(image => ART_URL_Image + image.data.image_id + ART_URL_FOOTER)
                 )
             )
-
                 .then(imageURLS => {
                     //console.log(imageURLS)
                     display(imageURLS, resultsTitle)
                 })
         })
+
 }
 
 function display(imageURLS, resultsTitle) {
