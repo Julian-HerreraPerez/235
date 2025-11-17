@@ -75,6 +75,27 @@ function display(imageURLS, resultsTitle) {
         fullWidth: false,
         indicators: false
     });
+
+    window.addEventListener("keydown",function(event) {
+    if(event.defaultPrevented){
+        return;
+    }
+
+    let instance = "";
+    for(let i = 0; i< imageURLS.length; i++)
+    {
+        instance = M.Carousel.getInstance();
+    }
+
+    switch(event.key){
+        case "ArrowLeft":
+            instance.prev();
+            break;
+        case "ArrowRight":
+            instance.next();
+            break;
+    }
+});
 }
 
 function enlargeImg(imgElemt) {
@@ -90,9 +111,9 @@ function enlargeImg(imgElemt) {
         imgElemt.style.transition = "width 0.5s ease";
         imgElemt.style.zoomed = "";
     }
-
-
 }
+
+
 
 
 
