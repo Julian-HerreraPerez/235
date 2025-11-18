@@ -15,6 +15,16 @@
     <div class="widgets">
         <input id="searchterm" type="text" size="20" maxlength="40" autofocus placeholder="Search" />
     </div>
+    <div class="input-field">
+        <select id="limit">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+        <label for="limit">Max # results</label>
+    </div>
     <div class="widgets">
         <button type="button" id="search">Find some Art!</button>
     </div>
@@ -22,6 +32,9 @@
 
     <h2>Results</h2>
     <div id="content" class="carousel"></div>
+
+    <h2 class="Favorites">Favorites</h2>
+    <div class="favorites-container"></div>
 </body>
 
 </html>

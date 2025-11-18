@@ -1,5 +1,8 @@
 window.onload = (e) => { document.querySelector("#search").onclick = searchButtonClicked };
-
+document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('select');
+    M.FormSelect.init(elems);
+});
 
 function searchButtonClicked() {
     const ART_URL_SEARCH = "https://api.artic.edu/api/v1/artworks/search"
@@ -33,7 +36,7 @@ function searchButtonClicked() {
             }
             const resultsURL = results.map(item => item.api_link);
             const resultsTitle = results.map(item => item.title);
-            
+
 
             results.forEach(item => {
                 let resultsURL = (item.api_link);
@@ -76,26 +79,23 @@ function display(imageURLS, resultsTitle) {
         indicators: false
     });
 
-    window.addEventListener("keydown",function(event) {
-    if(event.defaultPrevented){
-        return;
-    }
+    window.addEventListener("keydown", function (event) {
+        if (event.defaultPrevented) {
+            return;
+        }
 
-    let instance = "";
-    for(let i = 0; i< imageURLS.length; i++)
-    {
-        instance = M.Carousel.getInstance();
-    }
+        let instance = M.Carousel.getInstance(document.querySelector('.carousel'));
+        if (!instance) return;
 
-    switch(event.key){
-        case "ArrowLeft":
-            instance.prev();
-            break;
-        case "ArrowRight":
-            instance.next();
-            break;
-    }
-});
+        switch (event.key) {
+            case "ArrowLeft":
+                instance.prev();
+                break;
+            case "ArrowRight":
+                instance.next();
+                break;
+        }
+    });
 }
 
 function enlargeImg(imgElemt) {
@@ -103,14 +103,52 @@ function enlargeImg(imgElemt) {
         imgElemt.style.width = "200%";
         imgElemt.style.height = "auto";
         imgElemt.style.transition = "width 0.5s ease";
+        imgElemt.style.transform = "translateX(-200px) translateY(-300px)";
+        imgElemt.style.transition = "transform 0.5s ease"
+
         imgElemt.style.zoomed = "true";
+
     }
     else {
         imgElemt.style.width = "100%";
         imgElemt.style.height = "auto";
         imgElemt.style.transition = "width 0.5s ease";
+        imgElemt.style.transform = "translateX(0px) translateY(0px)";
+
         imgElemt.style.zoomed = "";
     }
+
+    window.addEventListener("keydown", function (event) {
+        if (event.defaultPrevented) {
+            return;
+        }
+
+        let instance = M.Carousel.getInstance(document.querySelector('.carousel'));
+        if (!instance) return;
+
+        switch (event.key) {
+            case "f":
+                let favContainer = document.querySelector(".favorites-container");
+                if (!favContainer) return;
+                let imgURL = imgElemt.src;;
+
+                let alreadyAdded = favContainer.querySelector(`img[src="${imgURL}"]`);
+                if (alreadyAdded) {
+                    return;
+                }
+
+                let line = `
+                    <a class="favorite-item">
+                        <img src="${imgURL}" />
+                    </a>
+                `;
+                favContainer.innerHTML += line;
+                break;
+        }
+        const divToSave = document.getElementById('favorites-container');
+        localStorage.setItem('Favorites', divToSave);
+    });
+
 }
 
 

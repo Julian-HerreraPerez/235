@@ -14,6 +14,16 @@ body {
     object-fit: cover;
 }
 
+.favorites-container img {
+    display: flex;
+    width: 250px;
+    height: 250px;
+}
+
+.carousel .carousel-item {
+    width: 400px !important;
+}
+
 #search {
     color: black;
     font-size: 16px;
@@ -28,18 +38,25 @@ body {
 input::placeholder {
     color: rgb(0, 0, 0);
 }
+
 .widgets {
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
 label {
-  font-family: sans-serif;
-  font-size: 1rem;
-  padding-right: 10px;
+    font-family: sans-serif;
+    font-size: 1rem;
+    padding-right: 10px;
 }
 
 select {
-  font-size: 0.9rem;
-  padding: 2px 5px;
+    font-size: 0.9rem;
+    padding: 2px 5px;
 }
 
+.input-field {
+    border: 1px solid black;
+    background-color: white;
+    max-width: 150px;
+}
