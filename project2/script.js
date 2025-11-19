@@ -130,7 +130,9 @@ function enlargeImg(imgElemt) {
             case "f":
                 let favContainer = document.querySelector(".favorites-container");
                 if (!favContainer) return;
-                let imgURL = imgElemt.src;;
+                let activeImg = document.querySelector(".carousel-item.active img");
+                if (!activeImg) return;
+                let imgURL = activeImg.src;
 
                 let alreadyAdded = favContainer.querySelector(`img[src="${imgURL}"]`);
                 if (alreadyAdded) {
