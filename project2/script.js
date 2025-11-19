@@ -1,7 +1,17 @@
-window.onload = (e) => { document.querySelector("#search").onclick = searchButtonClicked };
+window.onload = (e) => {
+    document.querySelector("#search").onclick = searchButtonClicked,
+        document.querySelector("#fav-button").onclick = favoriteOnClick
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('select');
     M.FormSelect.init(elems);
+
+    const saved = localStorage.getItem('Favorites');
+    if (saved) {
+        document.querySelector('.favorites-container').innerHTML = saved;
+    }
 });
 
 function searchButtonClicked() {
@@ -19,6 +29,10 @@ function searchButtonClicked() {
     term = encodeURIComponent(term);
 
     url += "?q=" + term;
+
+    if (limit.value == 5) {
+        url += "&query[term][is_public_domain]=true";
+    }
 
     console.log(url);
 
@@ -118,44 +132,35 @@ function enlargeImg(imgElemt) {
         imgElemt.style.zoomed = "";
     }
 
-    window.addEventListener("keydown", function (event) {
-        if (event.defaultPrevented) {
-            return;
-        }
+}
 
-        let instance = M.Carousel.getInstance(document.querySelector('.carousel'));
-        if (!instance) return;
 
-        switch (event.key) {
-            case "f":
-                let favContainer = document.querySelector(".favorites-container");
-                if (!favContainer) return;
-                let activeImg = document.querySelector(".carousel-item.active img");
-                if (!activeImg) return;
-                let imgURL = activeImg.src;
+function favoriteOnClick() {
+    let instance = M.Carousel.getInstance(document.querySelector('.carousel'));
+    if (!instance) return;
 
-                let alreadyAdded = favContainer.querySelector(`img[src="${imgURL}"]`);
-                if (alreadyAdded) {
-                    return;
-                }
 
-                let line = `
+    let favContainer = document.querySelector(".favorites-container");
+    if (!favContainer) return;
+    let activeImg = document.querySelector(".carousel-item.active img");
+    if (!activeImg) return;
+    let imgURL = activeImg.src;
+
+    let alreadyAdded = favContainer.querySelector(`img[src="${imgURL}"]`);
+    if (alreadyAdded) {
+        return;
+    }
+
+    let line = `
                     <a class="favorite-item">
                         <img src="${imgURL}" />
                     </a>
                 `;
-                favContainer.innerHTML += line;
-                break;
-        }
-        const divToSave = document.getElementById('favorites-container');
-        localStorage.setItem('Favorites', divToSave);
-    });
+    favContainer.innerHTML += line;
 
+    const divToSave = document.querySelector('.favorites-container');
+    localStorage.setItem('Favorites', divToSave.innerHTML);
 }
-
-
-
-
 
 
 
