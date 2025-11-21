@@ -1,6 +1,7 @@
 window.onload = (e) => {
     document.querySelector("#search").onclick = searchButtonClicked,
-        document.querySelector("#fav-button").onclick = favoriteOnClick
+        document.querySelector("#fav-button").onclick = favoriteOnClick,
+        document.querySelector("#deltFav-button").onclick = deleteOnClick;
 }
 
 
@@ -11,6 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const saved = localStorage.getItem('Favorites');
     if (saved) {
         document.querySelector('.favorites-container').innerHTML = saved;
+    }
+
+    const savedTitles = localStorage.getItem("FavoriteTitles");
+    if (savedTitles) {
+        document.querySelector('#list-favs').innerHTML = savedTitles;
+        const select = document.querySelector("#list-favs");
+        M.FormSelect.init(select);
     }
 });
 
@@ -33,6 +41,17 @@ function searchButtonClicked() {
     if (limit.value == 5) {
         url += "&query[term][is_public_domain]=true";
     }
+    if (limit.value == 10) {
+        url += "&query[term][classification_titles.keyword]=sculpture";
+
+    }
+    if (limit.value == 15) {
+        url += "&query[term][classification_titles.keyword]=modern%20and%20contemporary%20art";
+    }
+    if (limit.value == 20) {
+        url += "&query[term][classification_titles.keyword]=painting";
+    }
+
 
     console.log(url);
 
@@ -80,10 +99,12 @@ function display(imageURLS, resultsTitle) {
     container.innerHTML = "";
 
     for (let i = 0; i < imageURLS.length; i++) {
-        let line = `<a class='carousel-item' >`;
-        line += `<img src='${imageURLS[i]}' alt='Art Image ${i + 1}' onclick="enlargeImg(this)"/>`;
-        line += `<p>${resultsTitle[i]}</p>`
-        line += `</a>`;
+        let line = `
+        <a class="carousel-item" data-title="${resultsTitle[i]}">
+        <img src="${imageURLS[i]}" alt="Art Image ${i + 1}" onclick="enlargeImg(this)">
+        <p>${resultsTitle[i]}</p>
+        </a>
+        `;
         container.innerHTML += line;
     }
 
@@ -113,23 +134,12 @@ function display(imageURLS, resultsTitle) {
 }
 
 function enlargeImg(imgElemt) {
-    if (!imgElemt.style.zoomed) {
-        imgElemt.style.width = "200%";
-        imgElemt.style.height = "auto";
-        imgElemt.style.transition = "width 0.5s ease";
-        imgElemt.style.transform = "translateX(-200px) translateY(-300px)";
-        imgElemt.style.transition = "transform 0.5s ease"
-
-        imgElemt.style.zoomed = "true";
+    if (!imgElemt.classList.contains("zoomed")) {
+        imgElemt.classList.add("zoomed");
 
     }
     else {
-        imgElemt.style.width = "100%";
-        imgElemt.style.height = "auto";
-        imgElemt.style.transition = "width 0.5s ease";
-        imgElemt.style.transform = "translateX(0px) translateY(0px)";
-
-        imgElemt.style.zoomed = "";
+        imgElemt.classList.remove("zoomed");
     }
 
 }
@@ -143,8 +153,10 @@ function favoriteOnClick() {
     let favContainer = document.querySelector(".favorites-container");
     if (!favContainer) return;
     let activeImg = document.querySelector(".carousel-item.active img");
+    let activeImgTitle = document.querySelector(".carousel-item.active");
     if (!activeImg) return;
     let imgURL = activeImg.src;
+    let Title = activeImgTitle.dataset.title;
 
     let alreadyAdded = favContainer.querySelector(`img[src="${imgURL}"]`);
     if (alreadyAdded) {
@@ -154,12 +166,49 @@ function favoriteOnClick() {
     let line = `
                     <a class="favorite-item">
                         <img src="${imgURL}" />
+                        <p>${Title}</p>
                     </a>
                 `;
     favContainer.innerHTML += line;
 
     const divToSave = document.querySelector('.favorites-container');
     localStorage.setItem('Favorites', divToSave.innerHTML);
+
+    const select = document.querySelector("#list-favs");
+    const option = document.createElement("option")
+    option.textContent = Title;
+    option.value = Title;
+    select.appendChild(option);
+
+    localStorage.setItem("FavoriteTitles", select.innerHTML);
+
+    M.FormSelect.init(select);
+
+
+}
+
+function deleteOnClick() {
+    const select = document.querySelector("#list-favs");
+    const value = select.value.trim();
+    const saved = document.querySelector('.favorites-container');
+
+    if (!saved) return;
+
+    const items = saved.querySelectorAll(".favorite-item");
+
+    for (let item of items) {
+        const title = item.querySelector("p").textContent.trim();
+
+        if (title == value) {
+            item.remove();
+            select.remove(select.selectedIndex);
+
+            localStorage.setItem('Favorites', saved.innerHTML);
+            localStorage.setItem("FavoriteTitles", select.innerHTML);
+            M.FormSelect.init(select);
+            return;
+        }
+    }
 }
 
 

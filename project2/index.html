@@ -20,9 +20,10 @@
         <select id="limit">
             <option value="">--Please choose an option--</option>
             <option value="5">Public Domain</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
+            <option value="15">Modern and Contemporary</option>
+            <option value="10">Sculpture</option>
+            <option value="20">Paintings</option>
+            <option value="">None</option>
         </select>
     </div>
     <div class="widgets">
@@ -34,7 +35,18 @@
     <h2>Results</h2>
     <div id="content" class="carousel"></div>
 
-    <h2 class="Favorites">Favorites</h2>
+    <div class="Favorite">
+        <h2 class="Favorites">Favorites</h2>
+        <div class="widgets">
+            <div class="input-field">
+                <select id="list-favs">
+                    <option value="">--Please choose an option--</option>
+                </select>
+            </div>
+            <button type="button" id="deltFav-button">Delete a Favorite</button>
+        </div>
+    </div>
+    </div>
     <div class="favorites-container"></div>
 </body>
 
