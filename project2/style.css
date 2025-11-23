@@ -1,5 +1,17 @@
 body {
     background-color: rgb(72, 69, 65);
+
+
+    display: grid;
+
+
+    grid-template-areas:
+        "search search"
+        "favs-search   gallery"
+        "favs-img     gallery";
+
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
 }
 
 label {
@@ -8,15 +20,28 @@ label {
     margin-left: 1em;
 }
 
-
 .favorite-item img,
 .favorite-item p {
     margin-left: 1em;
+    max-width: 400px;
+    max-height: 400px;
+}
+
+
+.favorites-container {
+    grid-area: favs-img;
+}
+
+.Favorite {
+    grid-area: favs-search;
 }
 
 .carousel {
+    grid-area: gallery;
     display: flex;
     height: 800px;
+    position: relative;
+    overflow: visible;
 }
 
 .carousel-item img {
@@ -24,31 +49,42 @@ label {
     height: 100%;
     object-fit: cover;
     transition: all 0.5s ease;
+    z-index: 5;
 }
 
-.favorites-container img {
-    display: flex;
-    width: 250px;
-    height: 250px;
-}
 
 .carousel .carousel-item {
     width: 400px !important;
-    height: 500px;
+    height: 620px !important;
+    z-index: 1;
+}
+
+#frame {
+    grid-area: gallery;
+    display: flex;
+    justify-self: center;
+    transform: scale(2) translate(0px, 100px);
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    opacity: 1;
+}
+
+#frame.hidden {
+    opacity: 0;
 }
 
 .carousel-item img.zoomed {
     transform: scale(2) translate(-10px, -10px);
     object-fit: contain;
+    z-index: 999;
 }
-
 
 #search {
     color: black;
     font-size: 16px;
 }
 
-#deltFav {
+#delt {
     color: black;
     font-size: 16px;
 }
@@ -85,8 +121,27 @@ select {
     padding: 2px 5px;
 }
 
+
+#search-container {
+    grid-area: search;
+}
+
 .input-field {
     border: 1px solid black;
     background-color: white;
     max-width: 220px;
+}
+
+@media screen and (max-width: 850px) {
+    body {
+        display: grid;
+        grid-template-areas:
+            "search "
+            "gallery"
+            "favs-search"
+            "favs-img";
+
+        grid-template-columns: auto auto auto;
+        grid-template-rows: auto auto auto;
+    }
 }

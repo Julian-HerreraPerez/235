@@ -122,24 +122,36 @@ function display(imageURLS, resultsTitle) {
         let instance = M.Carousel.getInstance(document.querySelector('.carousel'));
         if (!instance) return;
 
+        let activeImg = document.querySelector(".carousel-item.active img");
+        let isZoomed = activeImg && activeImg.classList.contains("zoomed");
+
         switch (event.key) {
             case "ArrowLeft":
-                instance.prev();
+                if (!isZoomed) {
+                    instance.prev();
+                }
                 break;
             case "ArrowRight":
-                instance.next();
+                if (!isZoomed) {
+                    instance.next();
+                }
                 break;
         }
     });
 }
 
 function enlargeImg(imgElemt) {
+    const frame = document.querySelector("#frame");
+
     if (!imgElemt.classList.contains("zoomed")) {
         imgElemt.classList.add("zoomed");
-
+        frame.style.visibility = "hidden";
+        frame.classList.add("hidden");
     }
     else {
         imgElemt.classList.remove("zoomed");
+        frame.style.visibility = "visible";
+        frame.classList.remove("hidden");
     }
 
 }
@@ -183,8 +195,6 @@ function favoriteOnClick() {
     localStorage.setItem("FavoriteTitles", select.innerHTML);
 
     M.FormSelect.init(select);
-
-
 }
 
 function deleteOnClick() {
