@@ -169,6 +169,11 @@ select {
     overflow: visible;
 }
 
+.description{
+    color: aliceblue;
+}
+
+
 @media screen and (max-width: 850px) {
     body {
         display: grid;

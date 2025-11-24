@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const select = document.querySelector("#list-favs");
         M.FormSelect.init(select);
     }
+
+    const savedSearch = localStorage.getItem("Search");
+    if(savedSearch)
+    {
+        document.querySelector("#searchterm").value = savedSearch;
+    }
 });
 
 function searchButtonClicked() {
@@ -32,6 +38,7 @@ function searchButtonClicked() {
 
     let displayTerm = "";
     let term = document.querySelector("#searchterm").value;
+    localStorage.setItem("Search", term);
     displayTerm = term = term.trim();
 
     term = encodeURIComponent(term);
@@ -69,6 +76,8 @@ function searchButtonClicked() {
             }
             const resultsURL = results.map(item => item.api_link);
             const resultsTitle = results.map(item => item.title);
+            const resultsArtist = results.map(item => item.artist_display);
+            const resultsAltTitle = results.map(item => item.alt_text);
 
 
             results.forEach(item => {
@@ -80,18 +89,29 @@ function searchButtonClicked() {
                 resultsURL.map(link =>
                     fetch(link)
                         .then(response => response.json())
-                        .then(image => ART_URL_Image + image.data.image_id + ART_URL_FOOTER)
+                        .then(data => {
+                            return{
+                            imgURL: ART_URL_Image + data.data.image_id + ART_URL_FOOTER,
+                            artist: data.data.artist_display,
+                            alt: data.data.thumbnail?.alt_text ?? "No Description",
+                            description: data.data.description ?? "No description available."
+                            };
+                        })
                 )
             )
-                .then(imageURLS => {
+                .then(fullData => {
                     //console.log(imageURLS)
-                    display(imageURLS, resultsTitle)
+                    const imageURLS = fullData.map(x => x.imgURL);
+                    const resultsArtist = fullData.map(x => x.artist);
+                    const resultsAltTitle = fullData.map(x=> x.alt)
+                    const resultsDescription = fullData.map(x => x.description)
+                    display(imageURLS, resultsTitle,resultsArtist,resultsAltTitle, resultsDescription)
                 })
         })
 
 }
 
-function display(imageURLS, resultsTitle) {
+function display(imageURLS, resultsTitle, resultsArtist,resultsAltTitle,resultsDescription) {
 
     const container = document.querySelector("#content");
 
@@ -101,8 +121,10 @@ function display(imageURLS, resultsTitle) {
     for (let i = 0; i < imageURLS.length; i++) {
         let line = `
         <a class="carousel-item" data-title="${resultsTitle[i]}">
-        <img src="${imageURLS[i]}" alt="Art Image ${i + 1}" onclick="enlargeImg(this)">
+        <img src="${imageURLS[i]}" alt="${resultsAltTitle[i]} ${i + 1}" onclick="enlargeImg(this)">
         <p>${resultsTitle[i]}</p>
+        <p>${resultsArtist[i]}</p>
+        <p class="description">${resultsDescription[i]}</p>
         </a>
         `;
         container.innerHTML += line;
@@ -178,12 +200,11 @@ function favoriteOnClick() {
 
     let line = `
                     <a class="favorite-item">
-                        <img src="${imgURL}" />
+                        <img src="${imgURL} alt=${imgURL.alt_text}" />
                         <p>${Title}</p>
                     </a>
                 `;
     favContainer.innerHTML += line;
-
     const divToSave = document.querySelector('.favorites-container');
     localStorage.setItem('Favorites', divToSave.innerHTML);
 
