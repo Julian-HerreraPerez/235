@@ -1,17 +1,15 @@
 body {
-    background-color: rgb(72, 69, 65);
-
+    background-color: rgb(64, 64, 64);
 
     display: grid;
 
-
     grid-template-areas:
-        "search search"
+        "search gallery"
         "favs-search   gallery"
         "favs-img     gallery";
 
-    grid-template-columns: auto auto auto;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: 700px 400px;
+    grid-template-rows: 370px auto auto;
 }
 
 label {
@@ -23,17 +21,38 @@ label {
 .favorite-item img,
 .favorite-item p {
     margin-left: 1em;
-    max-width: 400px;
-    max-height: 400px;
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 10%;
+    object-fit: cover;
 }
 
 
 .favorites-container {
     grid-area: favs-img;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(88, 88, 88);
+    filter: drop-shadow(19px 15px 5px #1f1e1e) drop-shadow(-19px 15px 5px #1f1e1e);
+    margin-left: 3em;
+    max-width: 670px;
+
 }
 
 .Favorite {
     grid-area: favs-search;
+    background-color: rgb(88, 88, 88);
+    box-shadow: 19px 15px 5px rgba(31, 30, 30, 0.9), -19px 15px 5px rgba(31, 30, 30, 0.9);
+    margin-left: 3em;
+    margin-left: 3em;
+    min-width: 650px;
+    max-width: 670px;
+    overflow: visible;
+    margin-top: vh;
+}
+
+.Favorite h2 {
+    justify-self: center;
 }
 
 .carousel {
@@ -42,6 +61,7 @@ label {
     height: 800px;
     position: relative;
     overflow: visible;
+    margin-left: 15vw;
 }
 
 .carousel-item img {
@@ -62,10 +82,13 @@ label {
 #frame {
     grid-area: gallery;
     display: flex;
-    justify-self: center;
-    transform: scale(2) translate(0px, 100px);
+    transform: scale(2) translate(180px, 100px);
     pointer-events: none;
     transition: opacity 0.4s ease;
+    opacity: 0;
+}
+
+#frame.visible {
     opacity: 1;
 }
 
@@ -99,6 +122,7 @@ label {
     border: 3px solid black;
     width: 200px;
     background-color: aliceblue;
+    margin-top: 3vh;
 }
 
 input::placeholder {
@@ -108,12 +132,14 @@ input::placeholder {
 .widgets {
     margin-top: 1em;
     margin-bottom: 1em;
+    justify-self: center;
 }
 
 label {
     font-family: sans-serif;
     font-size: 1rem;
     padding-right: 10px;
+    margin-left: 14em;
 }
 
 select {
@@ -121,15 +147,26 @@ select {
     padding: 2px 5px;
 }
 
-
 #search-container {
     grid-area: search;
+    background-color: rgb(88, 88, 88);
+    box-shadow:
+        19px 15px 5px rgba(31, 30, 30, 0.9),
+        -19px 15px 5px rgba(31, 30, 30, 0.9),
+        19px -15px 20px rgba(31, 30, 30, 0.9),
+        -19px -15px 20px rgba(31, 30, 30, 0.9);
+    margin-left: 3em;
+    max-width: 670px;
+    max-height: 500px;
+    margin-top: 4vh;
 }
 
 .input-field {
     border: 1px solid black;
     background-color: white;
-    max-width: 220px;
+    width: 250px;
+    justify-self: center;
+    overflow: visible;
 }
 
 @media screen and (max-width: 850px) {

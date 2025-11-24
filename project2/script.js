@@ -138,6 +138,7 @@ function display(imageURLS, resultsTitle) {
                 break;
         }
     });
+    updateFrameVisibility();
 }
 
 function enlargeImg(imgElemt) {
@@ -221,7 +222,18 @@ function deleteOnClick() {
     }
 }
 
+function updateFrameVisibility() {
+    const imgs = document.querySelectorAll('.carousel-item img');
+    const frame = document.getElementById('frame');
 
+    if (imgs.length == 0) {
+        frame.classList.add('hidden');
+    }
+    else {
+        frame.classList.remove('hidden');
+        frame.classList.add('visible')
+    }
+}
 
 
 
