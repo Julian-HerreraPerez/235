@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation</title>
+</head>
+<h1> Project 2 Documentation Page</h1>
+
+
+<h2>Project Description</h2>
+
+<p>
+    For this project I chose to use the <strong>Art Institute of Chicago's API</strong>, to create an art
+    finder.<br>
+    The page works by taking in a request from the user using the search bar.<br>
+    Taking that term and using the API's search URL, it looks for any art that is related to the term.<br>
+    Each item that is returned has an API_Link URL, because the Art Institute uses another API to hold
+    their images.<br>
+    From there each artwork has an image id that when sandwiched between two URLs gives you the
+    image back.<br>
+    The images are then displayed to the users using the Materialize carousel framework, to create
+    a revolving gallery effect.
+</p>
+
+
+<h2>Special Efforts</h2>
+<p>
+    The special effort I put into this project is, first, making it look pleasing with the frame that appears when a
+    search is done and the fact that it disappears when the image is clicked.<br>
+    Another part was the feature I created where, when the image is clicked, it becomes larger so users can view the art
+    better.<br>
+    A description box about the piece is also displayed, and I created a way to close it so that users can look at the
+    art piece without it obstructing the work.<br>
+    I also created a dropdown filter where a user can filter results based on whether the art is public domain, modern,
+    a painting, or a sculpture.<br>
+    My final piece of special effort went into the favorites category. When a user likes a piece, they can add it to
+    their favorites. This then adds the art image to the favorites area, where a smaller rounded image of the artwork is
+    displayed with the title underneath.<br>
+    The favorites section also has a dropdown menu where users can select from their favorites and remove a specific
+    artwork if they no longer want it.<br>
+    Both the images and dropdown menu are saved in local storage so users can always come back to the page to look at
+    them.
+</p>
+
+<h2>Citations</h2>
+<h3>Frame PNG</h3>
+<a href="https://www.vecteezy.com/free-png/frame">Frame</a>
+<h3>Art Institute of Chicago API</h3>
+<a href="https://api.artic.edu/docs/#quick-start">Documention</a>
+<h3>Stack Overflow- Rounded images</h3>
+<a href="https://stackoverflow.com/questions/25267774/rounded-corners-on-rectangular-image-using-css-only"> Rounded
+    Images</a>
+<h3>ChatGPT for Debugging</h3>
+<a href="https://chatgpt.com/?openaicom_referred=true">GPT</a>
+
+<body>
+
+</body>
+
+</html>

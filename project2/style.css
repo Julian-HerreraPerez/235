@@ -12,6 +12,13 @@ body {
     grid-template-rows: 370px auto auto;
 }
 
+#instruction {
+    color: aliceblue;
+    text-align: center;
+    font-size: large;
+}
+
+
 label {
     font-size: 20px !important;
     color: aliceblue;
@@ -48,7 +55,6 @@ label {
     min-width: 650px;
     max-width: 670px;
     overflow: visible;
-    margin-top: vh;
 }
 
 .Favorite h2 {
@@ -80,7 +86,7 @@ label {
 
 #frame {
     grid-area: gallery;
-    display: flex;
+    display: grid;
     transform: scale(2);
     margin-top: 14em;
     margin-left: 24em;
