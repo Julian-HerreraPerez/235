@@ -1,12 +1,13 @@
 window.onload = (e) => {
     document.querySelector("#search").onclick = searchButtonClicked,
         document.querySelector("#fav-button").onclick = favoriteOnClick,
+        document.querySelector("#description-button").onclick = minimizeOnClick,
         document.querySelector("#deltFav-button").onclick = deleteOnClick;
 }
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('select');
+    const elems = document.querySelectorAll('select');
     M.FormSelect.init(elems);
 
     const saved = localStorage.getItem('Favorites');
@@ -22,8 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const savedSearch = localStorage.getItem("Search");
-    if(savedSearch)
-    {
+    if (savedSearch) {
         document.querySelector("#searchterm").value = savedSearch;
     }
 });
@@ -76,13 +76,6 @@ function searchButtonClicked() {
             }
             const resultsURL = results.map(item => item.api_link);
             const resultsTitle = results.map(item => item.title);
-            const resultsArtist = results.map(item => item.artist_display);
-            const resultsAltTitle = results.map(item => item.alt_text);
-
-
-            results.forEach(item => {
-                let resultsURL = (item.api_link);
-            });
 
 
             Promise.all(
@@ -90,11 +83,11 @@ function searchButtonClicked() {
                     fetch(link)
                         .then(response => response.json())
                         .then(data => {
-                            return{
-                            imgURL: ART_URL_Image + data.data.image_id + ART_URL_FOOTER,
-                            artist: data.data.artist_display,
-                            alt: data.data.thumbnail?.alt_text ?? "No Description",
-                            description: data.data.description ?? "No description available."
+                            return {
+                                imgURL: ART_URL_Image + data.data.image_id + ART_URL_FOOTER,
+                                artist: data.data.artist_display,
+                                alt: data.data.thumbnail?.alt_text ?? "No Description",
+                                description: data.data.description ?? "No description available."
                             };
                         })
                 )
@@ -103,15 +96,17 @@ function searchButtonClicked() {
                     //console.log(imageURLS)
                     const imageURLS = fullData.map(x => x.imgURL);
                     const resultsArtist = fullData.map(x => x.artist);
-                    const resultsAltTitle = fullData.map(x=> x.alt)
+                    const resultsAltTitle = fullData.map(x => x.alt)
                     const resultsDescription = fullData.map(x => x.description)
-                    display(imageURLS, resultsTitle,resultsArtist,resultsAltTitle, resultsDescription)
+                    display(imageURLS, resultsTitle, resultsArtist, resultsAltTitle, resultsDescription)
                 })
         })
 
 }
 
-function display(imageURLS, resultsTitle, resultsArtist,resultsAltTitle,resultsDescription) {
+let carouselMoving = false;
+
+function display(imageURLS, resultsTitle, resultsArtist, resultsAltTitle, resultsDescription) {
 
     const container = document.querySelector("#content");
 
@@ -120,17 +115,17 @@ function display(imageURLS, resultsTitle, resultsArtist,resultsAltTitle,resultsD
 
     for (let i = 0; i < imageURLS.length; i++) {
         let line = `
-        <a class="carousel-item" data-title="${resultsTitle[i]}">
+        <a class="carousel-item" data-title='${encodeURIComponent(resultsTitle[i])}'
+        data-description='${encodeURIComponent(resultsDescription[i])}'>
         <img src="${imageURLS[i]}" alt="${resultsAltTitle[i]} ${i + 1}" onclick="enlargeImg(this)">
-        <p>${resultsTitle[i]}</p>
-        <p>${resultsArtist[i]}</p>
-        <p class="description">${resultsDescription[i]}</p>
+        <p class="artDetail">${resultsTitle[i]}</p>
+        <p class="artDetail">${resultsArtist[i]}</p>
         </a>
         `;
         container.innerHTML += line;
     }
 
-    var elems = document.querySelectorAll('.carousel');
+    let elems = document.querySelectorAll('.carousel');
     M.Carousel.init(elems, {
         fullWidth: false,
         indicators: false
@@ -165,18 +160,38 @@ function display(imageURLS, resultsTitle, resultsArtist,resultsAltTitle,resultsD
 
 function enlargeImg(imgElemt) {
     const frame = document.querySelector("#frame");
+    const descriptionOverlay = document.querySelector("#description-overlay");
+    const descriptionText = document.getElementById('description-text');
 
+    const parentItem = imgElemt.closest(".carousel-item");
+
+    if (!parentItem.classList.contains("active")) return;
+
+    const description = decodeURIComponent(parentItem.dataset.description);
+    const cleanDescription = description
+        .replace(/<p[^>]*>/gi, "")
+        .replace(/<\/p>/gi, "")
+        .replace(/<a[^>]*>/gi, "")
+        .replace(/<\/a>/gi, "")
+        .replace(/<em[^>]*>/gi, "")
+        .replace(/<\/em>/gi, "");
+    if (!parentItem.classList.contains("active")) return;
     if (!imgElemt.classList.contains("zoomed")) {
         imgElemt.classList.add("zoomed");
+
         frame.style.visibility = "hidden";
         frame.classList.add("hidden");
+
+        descriptionText.textContent = cleanDescription;
+        descriptionOverlay.style.display = "flex";
     }
     else {
         imgElemt.classList.remove("zoomed");
         frame.style.visibility = "visible";
         frame.classList.remove("hidden");
-    }
 
+        descriptionOverlay.style.display = "none";
+    }
 }
 
 
@@ -191,7 +206,7 @@ function favoriteOnClick() {
     let activeImgTitle = document.querySelector(".carousel-item.active");
     if (!activeImg) return;
     let imgURL = activeImg.src;
-    let Title = activeImgTitle.dataset.title;
+    let Title = decodeURIComponent(activeImgTitle.dataset.title);
 
     let alreadyAdded = favContainer.querySelector(`img[src="${imgURL}"]`);
     if (alreadyAdded) {
@@ -200,7 +215,7 @@ function favoriteOnClick() {
 
     let line = `
                     <a class="favorite-item">
-                        <img src="${imgURL} alt=${imgURL.alt_text}" />
+                        <img src="${imgURL}" alt="${imgURL.alt_text}" />
                         <p>${Title}</p>
                     </a>
                 `;
@@ -256,5 +271,7 @@ function updateFrameVisibility() {
     }
 }
 
-
-
+function minimizeOnClick() {
+    const descriptionOverlay = document.querySelector("#description-overlay");
+    descriptionOverlay.style.display = "none";
+}

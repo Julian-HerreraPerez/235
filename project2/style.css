@@ -4,11 +4,11 @@ body {
     display: grid;
 
     grid-template-areas:
-        "search gallery"
-        "favs-search   gallery"
-        "favs-img     gallery";
+        "search gallery gallery"
+        "favs-search   gallery gallery"
+        "favs-img     desc desc";
 
-    grid-template-columns: 700px 400px;
+    grid-template-columns: 700px 400px 600px;
     grid-template-rows: 370px auto auto;
 }
 
@@ -61,7 +61,6 @@ label {
     height: 800px;
     position: relative;
     overflow: visible;
-    margin-left: 15vw;
 }
 
 .carousel-item img {
@@ -169,10 +168,36 @@ select {
     overflow: visible;
 }
 
-.description{
-    color: aliceblue;
+#description-overlay {
+    grid-area: desc;
+    display: none;
+    justify-content: end;
+    color: white;
+    z-index: 9999;
+    font-size: large;
+    background-color: #1f1e1e;
+    margin-left: 2em;
+    margin-bottom: 1em;
 }
 
+#description-text {
+    margin: 1em;
+}
+
+.artDetail {
+    color: aliceblue;
+    text-align: center;
+    font-size: large;
+}
+
+#description-button {
+    grid-area: desc;
+    display: grid;
+    width: 150px;
+    height: 30px;
+    background-color: #403f3f;
+    color: rgb(141, 8, 8);
+}
 
 @media screen and (max-width: 850px) {
     body {
