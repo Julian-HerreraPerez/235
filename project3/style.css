@@ -5,8 +5,8 @@ body{
         "borderL road borderR"
         "borderL road borderR";
 
-    grid-template-columns: 500px auto 500px;
-    grid-template-rows: 250px 250px 450px;
+    grid-template-columns: 700px auto 600px;
+    grid-template-rows: 250px 250px 350px;
 }
 
 
@@ -32,4 +32,17 @@ body{
     grid-area: borderL;
     color: white;
     margin-left: 1em;
+}
+#road{
+    grid-area: road;
+    width: 540px;
+    height: 850px;
+    justify-self: center;
+}
+#gamearea{
+    grid-area: road;
+    width: 520px;
+}
+#canvas {
+    border:1px solid red;
 }

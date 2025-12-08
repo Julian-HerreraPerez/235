@@ -1,3 +1,6 @@
+
+
+
 window.addEventListener("keydown", function (event) {
         if (event.defaultPrevented) {
             return;
@@ -5,14 +8,24 @@ window.addEventListener("keydown", function (event) {
         
 
         let player = document.getElementById("player");
-        let currentX = parseInt(player.style.left) || 0;
+        let x = parseInt(player.style.left) || 0;
+        let area = document.getElementById("gamearea");
+
+        let pWidth = player.offsetWidth;
+        let aWidth = area.clientWidth/2;
+  
+
 
          switch (event.key) {
             case "ArrowLeft":
-                player.style.left= parseInt(currentX -5) + "px";
+                x -= 5;
                 break;
             case "ArrowRight":
-                player.style.left= parseInt(currentX +5) + "px";
+                x+=5;
                 break;
         }
+
+
+        x = Math.max(-aWidth, Math.min(x, aWidth));
+        player.style.left= x + "px";
     })
