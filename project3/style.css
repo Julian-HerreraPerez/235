@@ -1,1 +1,35 @@
+body{
+    display: grid;
+    grid-template-areas:
+        "borderL road borderR"
+        "borderL road borderR"
+        "borderL road borderR";
 
+    grid-template-columns: 500px auto 500px;
+    grid-template-rows: 250px 250px 450px;
+}
+
+
+
+#player{
+    max-width: 150px;
+    max-height: 150px;
+    position: relative;
+    left: 0px;
+    grid-area: road;
+    justify-self: center;
+    align-self: flex-end;
+}
+#borderL{
+    background-color: green;
+    grid-area: borderL;
+}
+#borderR{
+    background-color: green;
+    grid-area: borderR;
+}
+#score{
+    grid-area: borderL;
+    color: white;
+    margin-left: 1em;
+}
