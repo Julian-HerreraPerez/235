@@ -1,4 +1,4 @@
-body{
+body {
     display: grid;
     grid-template-areas:
         "borderL road borderR"
@@ -7,11 +7,12 @@ body{
 
     grid-template-columns: 700px auto 600px;
     grid-template-rows: 250px 250px 350px;
+    background-color: grey;
 }
 
 
 
-#player{
+#player {
     max-width: 150px;
     max-height: 150px;
     position: relative;
@@ -20,29 +21,42 @@ body{
     justify-self: center;
     align-self: flex-end;
 }
-#borderL{
+
+#borderL {
     background-color: green;
     grid-area: borderL;
 }
-#borderR{
+
+#borderR {
     background-color: green;
     grid-area: borderR;
 }
-#score{
+
+#score {
     grid-area: borderL;
     color: white;
     margin-left: 1em;
 }
-#road{
+
+#road {
     grid-area: road;
     width: 540px;
     height: 850px;
     justify-self: center;
 }
-#gamearea{
+
+#gamearea {
     grid-area: road;
     width: 520px;
+    height: 850px;
+    position: relative;
+    justify-self: center;
+    z-index: 10;
 }
-#canvas {
-    border:1px solid red;
+
+.object {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
