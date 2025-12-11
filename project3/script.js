@@ -94,27 +94,29 @@ function animate() {
         spawnRandomObject();
     }
 
-    for (let i = 0; i < objects.length; i++) {
+    for (let i = objects.length - 1; i >= 0; i--) {
         let currentObject = objects[i];
         currentObject.move(spawnRateOfDescent)
 
         if (currentObject.y > maxY) {
-            objects.splice(i, 1);
             currentObject.element.remove();
+            objects.splice(i, 1);
             i--;
+            continue;
         }
-        if (collisionDetection(currentObject.element, player)) {
-            objects.splice(i, 1);
-            currentObject.element.remove();
-            i--;
+
+        if (!currentObject.collected && collisionDetection(currentObject.element, player)) {
+            currentObject.collected = true;
 
             if (currentObject.type == "blue") {
-                console.log("blue")
                 score++;
                 scoreText.textContent = "Score: " + score;
+
+                currentObject.element.remove();
+                objects.splice(i, 1);
             }
             else if (currentObject.type == "red") {
-                gameOver("You hit oil and spun out. Score: " + score)
+                gameOver("You hit oil and spun out. Score: " + score);
             }
         }
     }
@@ -146,6 +148,7 @@ function gameOver(message) {
 
 function reset() {
     window.location.reload();
+    score = 0;
 }
 
 class spawningObjects {
@@ -154,6 +157,7 @@ class spawningObjects {
         this.element = element;
         this.x = x;
         this.y = y;
+        this.collected = false;
     }
 
     move(rate) {
